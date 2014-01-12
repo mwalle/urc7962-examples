@@ -1,0 +1,440 @@
+Index: binutils-2.20.1/include/opcode/maxq.h
+===================================================================
+--- binutils-2.20.1.orig/include/opcode/maxq.h	2005-05-10 12:21:13.000000000 +0200
++++ binutils-2.20.1/include/opcode/maxq.h	2014-01-12 22:41:46.761106978 +0100
+@@ -526,6 +526,8 @@
+    "DP[0]", DP, 0x3, 0x30 | DP, Reg_16W, MAX},
+   {
+    "DP[1]", DP, 0x7, 0x70 | DP, Reg_16W, MAX},
++  {
++   "CP", DP, 0xB, 0xB0 | DP, Reg_16W, MAX},
+ };
+ typedef struct
+ {
+@@ -551,274 +553,141 @@
+ 
+ reg_entry peripheral_reg_table[] =
+ {
+-  /* -------- The GPIO Module Registers -------- */
+-  /* Port n Output Registers : GPIO[0h-4h] */
+-  {
+-   "PO0", GPIO0, 0x0, 0x00 | MOD0, Reg_8W, MAX},
+-  {
+-   "PO1", GPIO0, 0x1, 0x10 | MOD0, Reg_8W, MAX},
+-  {
+-   "PO2", GPIO0, 0x2, 0x20 | MOD0, Reg_8W, MAX},
+-  {
+-   "PO3", GPIO0, 0x3, 0x30 | MOD0, Reg_8W, MAX},
+-  /* External Interrupt Flag Register : GPIO[6h] */
+-  {
+-   "EIF0", GPIO0, 0x6, 0x60 | MOD0, Reg_8W, MAX},
+-  /* External Interrupt Enable Register : GPIO[7h] */
+-  {
+-   "EIE0", GPIO0, 0x7, 0x70 | MOD0, Reg_8W, MAX},
+-  /* Port n Input Registers : GPIO[8h-Bh] */
+-  {
+-   "PI0", GPIO0, 0x8, 0x80 | MOD0, Reg_8W, MAX},
+-  {
+-   "PI1", GPIO0, 0x9, 0x90 | MOD0, Reg_8W, MAX},
+-  {
+-   "PI2", GPIO0, 0xa, 0xa0 | MOD0, Reg_8W, MAX},
+-  {
+-   "PI3", GPIO0, 0xb, 0xb0 | MOD0, Reg_8W, MAX},
+-  {
+-   "EIES0", GPIO0, 0xc, 0xc0 | MOD0, Reg_8W, MAX},
+-  /* Port n Direction Registers : GPIO[Ch-Fh] */
+-  {
+-   "PD0", GPIO0, 0x10, 0x10 | MOD0, Reg_8W, MAX},
+-  {
+-   "PD1", GPIO0, 0x11, 0x11 | MOD0, Reg_8W, MAX},
+   {
+-   "PD2", GPIO0, 0x12, 0x12 | MOD0, Reg_8W, MAX},
++   "PO0", MOD0, 0x0, 0x00 | MOD0, Reg_8W, MAX},
+   {
+-   "PD3", GPIO0, 0x13, 0x13 | MOD0, Reg_8W, MAX},
+-  /* -------- Real Time Counter Module RTC -------- */
+-  /* RTC Control Register : [01h] */
++   "PO1", MOD0, 0x1, 0x10 | MOD0, Reg_8W, MAX},
+   {
+-   "RCNT", RTC, 0x19, 0x19 | MOD0, Reg_16W, MAX},
+-  /* RTC Seconds High [02h] */
++   "PO2", MOD0, 0x2, 0x20 | MOD0, Reg_8W, MAX},
+   {
+-   "RTSS", RTC, 0x1A, 0x1A | MOD0, Reg_8W, MAX},
+-  /* RTC Seconds Low [03h] */
++   "PO3", MOD0, 0x3, 0x30 | MOD0, Reg_8W, MAX},
+   {
+-   "RTSH", RTC, 0x1b, 0x1b | MOD0, Reg_16W, MAX},
+-  /* RTC Subsecond Register [04h] */
++   "EIF0", MOD0, 0x6, 0x60 | MOD0, Reg_8W, MAX},
+   {
+-   "RTSL", RTC, 0x1C, 0x1C | MOD0, Reg_16W, MAX},
+-  /* RTC Alarm seconds high [05h] */
++   "EIE0", MOD0, 0x7, 0x70 | MOD0, Reg_8W, MAX},
+   {
+-   "RSSA", RTC, 0x1D, 0x1D | MOD0, Reg_8W, MAX},
+-  /* RTC Alarm seconds high [06h] */
++   "PI0", MOD0, 0x8, 0x80 | MOD0, Reg_8W, MAX},
+   {
+-   "RASH", RTC, 0x1E, 0x1E | MOD0, Reg_8W, MAX},
+-  /* RTC Subsecond Alarm Register [07h] */
++   "PI1", MOD0, 0x9, 0x90 | MOD0, Reg_8W, MAX},
+   {
+-   "RASL", RTC, 0x1F, 0x1F | MOD0, Reg_16W, MAX},
+-  /* -------- The GPIO Module Registers -------- */
+-  /* Port n Output Registers : GPIO[0h-4h] */
++   "PI2", MOD0, 0xa, 0xa0 | MOD0, Reg_8W, MAX},
+   {
+-   "PO4", GPIO1, 0x0, 0x00 | MOD1, Reg_8W, MAX},
++   "PI3", MOD0, 0xb, 0xb0 | MOD0, Reg_8W, MAX},
+   {
+-   "PO5", GPIO1, 0x1, 0x10 | MOD1, Reg_8W, MAX},
++   "EIES0", MOD0, 0xc, 0xc0 | MOD0, Reg_8W, MAX},
+   {
+-   "PO6", GPIO1, 0x2, 0x20 | MOD1, Reg_8W, MAX},
++   "EIES1", MOD0, 0xd, 0xd0 | MOD0, Reg_8W, MAX},
+   {
+-   "PO7", GPIO1, 0x3, 0x30 | MOD1, Reg_8W, MAX},
+-  /* External Interrupt Flag Register : GPIO[6h] */
++   "PD0", MOD0, 0x10, 0x10 | MOD0, Reg_8W, MAX},
+   {
+-   "EIF1", GPIO0, 0x6, 0x60 | MOD1, Reg_8W, MAX},
+-  /* External Interrupt Enable Register : GPIO[7h] */
++   "PD1", MOD0, 0x11, 0x11 | MOD0, Reg_8W, MAX},
+   {
+-   "EIE1", GPIO0, 0x7, 0x70 | MOD1, Reg_8W, MAX},
+-  /* Port n Input Registers : GPIO[8h-Bh] */
++   "PD2", MOD0, 0x12, 0x12 | MOD0, Reg_8W, MAX},
+   {
+-   "PI4", GPIO1, 0x8, 0x80 | MOD1, Reg_8W, MAX},
++   "PD3", MOD0, 0x13, 0x13 | MOD0, Reg_8W, MAX},
+   {
+-   "PI5", GPIO1, 0x9, 0x90 | MOD1, Reg_8W, MAX},
+-  {
+-   "PI6", GPIO1, 0xa, 0xa0 | MOD1, Reg_8W, MAX},
+-  {
+-   "PI7", GPIO1, 0xb, 0xb0 | MOD1, Reg_8W, MAX},
+-  {
+-   "EIES1", GPIO1, 0xc, 0xc0 | MOD1, Reg_8W, MAX},
+-  /* Port n Direction Registers : GPIO[Ch-Fh] */
+-  {
+-   "PD4", GPIO1, 0x10, 0x10 | MOD1, Reg_8W, MAX},
+-  {
+-   "PD5", GPIO1, 0x11, 0x11 | MOD1, Reg_8W, MAX},
+-  {
+-   "PD6", GPIO1, 0x12, 0x12 | MOD1, Reg_8W, MAX},
+-  {
+-   "PD7", GPIO1, 0x13, 0x13 | MOD1, Reg_8W, MAX},
+-#if 0
+-  /* Supply Boltage Check Register */
+-  {
+-   "SVS", GPIO1, 0x1e, 0x1e | GPIO1, Reg_8W, MAX},
+-  /* Wake up output register */
+-  {
+-   "WK0", GPIO1, 0x1f, 0x1f | GPIO1, Reg_8W, MAX},
+-#endif /* */
++   "CHPREV", MOD0, 0x17, 0x17 | MOD0, Reg_16W, MAX},
+ 
+-  /* -------- MAC Hardware multiplier module -------- */
+-  /* MAC Hardware Multiplier control register: [01h] */
+-  {
+-   "MCNT", MAC, 0x1, 0x10 | MOD2, Reg_8W, MAX},
+-  /* MAC Multiplier Operand A Register [02h] */
+-  {
+-   "MA", MAC, 0x2, 0x20 | MOD2, Reg_16W, MAX},
+-  /* MAC Multiplier Operand B Register [03h] */
+-  {
+-   "MB", MAC, 0x3, 0x30 | MOD2, Reg_16W, MAX},
+-  /* MAC Multiplier Accumulator 2 Register [04h] */
+-  {
+-   "MC2", MAC, 0x4, 0x40 | MOD2, Reg_16W, MAX},
+-  /* MAC Multiplier Accumulator 1 Register [05h] */
+-  {
+-   "MC1", MAC, 0x5, 0x50 | MOD2, Reg_16W, MAX},
+-  /* MAC Multiplier Accumulator 0 Register [06h] */
+   {
+-   "MC0", MAC, 0x6, 0x60 | MOD2, Reg_16W, MAX},
+-  /* -------- The Serial I/O module SER -------- */
+-  /* UART registers */
+-  /* Serial Port Control Register : SER[6h] */
++   "PO4", MOD1, 0x0, 0x00 | MOD1, Reg_8W, MAX},
+   {
+-   "SCON0", SER0, 0x6, 0x60 | MOD2, Reg_8W, MAX},
+-  /* Serial Data Buffer Register : SER[7h] */
++   "PO5", MOD1, 0x1, 0x10 | MOD1, Reg_8W, MAX},
+   {
+-   "SBUF0", SER0, 0x7, 0x70 | MOD2, Reg_8W, MAX},
+-  /* Serial Port Mode Register : SER[4h] */
++   "PO6", MOD1, 0x2, 0x20 | MOD1, Reg_8W, MAX},
+   {
+-   "SMD0", SER0, 0x8, 0x80 | MOD2, Reg_8W, MAX},
+-  /* Serial Port Phase Register : SER[4h] */
++   "WUTC", MOD1, 0x4, 0x40 | MOD1, Reg_8W, MAX},
+   {
+-   "PR0", SER1, 0x9, 0x90 | MOD2, Reg_16W, MAX},
+-  /* ------ LCD Display Module ---------- */
++   "WUT", MOD1, 0x5, 0x50 | MOD1, Reg_16W, MAX},
+   {
+-   "LCRA", LCD, 0xd, 0xd0 | MOD2, Reg_16W, MAX},
++   "PI4", MOD1, 0x8, 0x80 | MOD1, Reg_8W, MAX},
+   {
+-   "LCFG", LCD, 0xe, 0xe0 | MOD2, Reg_8W, MAX},
++   "PI5", MOD1, 0x9, 0x90 | MOD1, Reg_8W, MAX},
+   {
+-   "LCD16", LCD, 0xf, 0xf0 | MOD2, Reg_8W, MAX},
++   "PI6", MOD1, 0xa, 0xa0 | MOD1, Reg_8W, MAX},
+   {
+-   "LCD0", LCD, 0x10, 0x10 | MOD2, Reg_8W, MAX},
++   "PWCN", MOD1, 0xc, 0xc0 | MOD1, Reg_16W, MAX},
+   {
+-   "LCD1", LCD, 0x11, 0x11 | MOD2, Reg_8W, MAX},
++   "PD4", MOD1, 0x10, 0x10 | MOD1, Reg_8W, MAX},
+   {
+-   "LCD2", LCD, 0x12, 0x12 | MOD2, Reg_8W, MAX},
++   "PD5", MOD1, 0x11, 0x11 | MOD1, Reg_8W, MAX},
+   {
+-   "LCD3", LCD, 0x13, 0x13 | MOD2, Reg_8W, MAX},
+-  {
+-   "LCD4", LCD, 0x14, 0x14 | MOD2, Reg_8W, MAX},
+-  {
+-   "LCD5", LCD, 0x15, 0x15 | MOD2, Reg_8W, MAX},
++   "PD6", MOD1, 0x12, 0x12 | MOD1, Reg_8W, MAX},
++
+   {
+-   "LCD6", LCD, 0x16, 0x16 | MOD2, Reg_8W, MAX},
++   "TB0R", MOD2, 0x0, 0x00 | MOD2, Reg_16W, MAX},
+   {
+-   "LCD7", LCD, 0x17, 0x17 | MOD2, Reg_8W, MAX},
++   "TB0CN", MOD2, 0x1, 0x10 | MOD2, Reg_16W, MAX},
+   {
+-   "LCD8", LCD, 0x18, 0x18 | MOD2, Reg_8W, MAX},
++   "TB1R", MOD2, 0x2, 0x20 | MOD2, Reg_16W, MAX},
+   {
+-   "LCD9", LCD, 0x19, 0x19 | MOD2, Reg_8W, MAX},
++   "TB1CN", MOD2, 0x3, 0x30 | MOD2, Reg_16W, MAX},
+   {
+-   "LCD10", LCD, 0x1a, 0x1a | MOD2, Reg_8W, MAX},
++   "IRCN", MOD2, 0x4, 0x40 | MOD2, Reg_16W, MAX},
+   {
+-   "LCD11", LCD, 0x1b, 0x1b | MOD2, Reg_8W, MAX},
++   "IRCA", MOD2, 0x5, 0x50 | MOD2, Reg_16W, MAX},
+   {
+-   "LCD12", LCD, 0x1c, 0x1c | MOD2, Reg_8W, MAX},
++   "IRMT", MOD2, 0x6, 0x60 | MOD2, Reg_16W, MAX},
+   {
+-   "LCD13", LCD, 0x1d, 0x1d | MOD2, Reg_8W, MAX},
++   "IRCNB", MOD2, 0x7, 0x70 | MOD2, Reg_8W, MAX},
+   {
+-   "LCD14", LCD, 0x1e, 0x1e | MOD2, Reg_8W, MAX},
++   "TB0C", MOD2, 0x8, 0x80 | MOD2, Reg_16W, MAX},
+   {
+-   "LCD15", LCD, 0x1f, 0x1f | MOD2, Reg_8W, MAX},
+-  /* -------- SPI registers -------- */
+-  /* SPI data buffer Register : SER[7h] */
++   "TB0V", MOD2, 0x9, 0x90 | MOD2, Reg_16W, MAX},
+   {
+-   "SPIB", SPI, 0x5, 0x50 | MOD3, Reg_16W, MAX},
+-  /* SPI Control Register : SER[8h] Note : Bit 7 is a read only bit */
++   "TB1C", MOD2, 0xa, 0xa0 | MOD2, Reg_16W, MAX},
+   {
+-   "SPICN", SPI, 0x15, 0x15 | MOD3, Reg_8W, MAX},
+-  /* SPI Configuration Register : SER[9h] Note : Bits 4,3 and 2 are read
+-     only.  */
++   "TB1V", MOD2, 0xb, 0xb0 | MOD2, Reg_16W, MAX},
+   {
+-   "SPICF", SPI, 0x16, 0x16 | MOD3, Reg_8W, MAX},
+-  /* SPI Clock Register : SER[Ah] */
++   "IRV", MOD2, 0xc, 0xc0 | MOD2, Reg_16W, MAX},
++
+   {
+-   "SPICK", SPI, 0x17, 0x17 | MOD3, Reg_8W, MAX},
+-  /* -------- One Wire Bus Master OWBM -------- */
+-  /* OWBM One Wire address Register register: [01h] */
++   "SCON0", MOD3, 0x0, 0x00 | MOD3, Reg_8W, MAX},
+   {
+-   "OWA", OWBM, 0x13, 0x13 | MOD3, Reg_8W, MAX},
+-  /* OWBM One Wire Data register: [02h] */
++   "SBUF0", MOD3, 0x1, 0x10 | MOD3, Reg_8W, MAX},
+   {
+-   "OWD", OWBM, 0x14, 0x14 | MOD3, Reg_8W, MAX},
+-  /* -------- The Serial I/O module SER -------- */
+-  /* UART registers */
+-  /* Serial Port Control Register : SER[6h] */
++   "SCON1", MOD3, 0x2, 0x20 | MOD3, Reg_8W, MAX},
+   {
+-   "SCON1", SER1, 0x6, 0x60 | MOD3, Reg_8W, MAX},
+-  /* Serial Data Buffer Register : SER[7h] */
++   "SBUF1", MOD3, 0x3, 0x30 | MOD3, Reg_8W, MAX},
+   {
+-   "SBUF1", SER1, 0x7, 0x70 | MOD3, Reg_8W, MAX},
+-  /* Serial Port Mode Register : SER[4h] */
++   "SPIB0", MOD3, 0x4, 0x40 | MOD3, Reg_16W, MAX},
+   {
+-   "SMD1", SER1, 0x8, 0x80 | MOD3, Reg_8W, MAX},
+-  /* Serial Port Phase Register : SER[4h] */
++   "SPICN0", MOD3, 0x5, 0x50 | MOD3, Reg_8W, MAX},
+   {
+-   "PR1", SER1, 0x9, 0x90 | MOD3, Reg_16W, MAX},
+-  /* -------- Timer/Counter 2 Module -------- */
+-  /* Timer 2 configuration Register : TC[3h] */
++   "SPIB1", MOD3, 0x6, 0x60 | MOD3, Reg_16W, MAX},
+   {
+-   "T2CNA0", TIMER20, 0x0, 0x00 | MOD3, Reg_8W, MAX},
++   "SPICN1", MOD3, 0x7, 0x70 | MOD3, Reg_8W, MAX},
+   {
+-   "T2H0", TIMER20, 0x1, 0x10 | MOD3, Reg_8W, MAX},
++   "PR0", MOD3, 0x8, 0x80 | MOD3, Reg_16W, MAX},
+   {
+-   "T2RH0", TIMER20, 0x2, 0x20 | MOD3, Reg_8W, MAX},
++   "SMD0", MOD3, 0x9, 0x90 | MOD3, Reg_8W, MAX},
+   {
+-   "T2CH0", TIMER20, 0x3, 0x30 | MOD3, Reg_8W, MAX},
++   "PR1", MOD3, 0xa, 0xa0 | MOD3, Reg_16W, MAX},
+   {
+-   "T2CNB0", TIMER20, 0xc, 0xc0 | MOD3, Reg_8W, MAX},
++   "SMD1", MOD3, 0xb, 0xb0 | MOD3, Reg_8W, MAX},
+   {
+-   "T2V0", TIMER20, 0xd, 0xd0 | MOD3, Reg_16W, MAX},
++   "SPICF0", MOD3, 0xc, 0xc0 | MOD3, Reg_8W, MAX},
+   {
+-   "T2R0", TIMER20, 0xe, 0xe0 | MOD3, Reg_16W, MAX},
++   "SPICK0", MOD3, 0xd, 0xd0 | MOD3, Reg_8W, MAX},
+   {
+-   "T2C0", TIMER20, 0xf, 0xf0 | MOD3, Reg_16W, MAX},
++   "SPICF1", MOD3, 0xe, 0xe0 | MOD3, Reg_8W, MAX},
+   {
+-   "T2CFG0", TIMER20, 0x10, 0x10 | MOD3, Reg_8W, MAX},
+-  /* Timer 2-1 configuration Register : TC[4h] */
++   "SPICK1", MOD3, 0xf, 0xf0 | MOD3, Reg_8W, MAX},
+ 
+   {
+-   "T2CNA1", TIMER21, 0x0, 0x00 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2H1", TIMER21, 0x1, 0x10 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2RH1", TIMER21, 0x2, 0x20 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2CH1", TIMER21, 0x3, 0x30 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2CNA2", TIMER21, 0x4, 0x40 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2H2", TIMER21, 0x5, 0x50 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2RH2", TIMER21, 0x6, 0x60 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2CH2", TIMER21, 0x7, 0x70 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2CNB1", TIMER21, 0x8, 0x80 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2V1", TIMER21, 0x9, 0x90 | MOD4, Reg_16W, MAX},
+-  {
+-   "T2R1", TIMER21, 0xa, 0xa0 | MOD4, Reg_16W, MAX},
++   "I2CCN", MOD4, 0x0, 0x00 | MOD4, Reg_16W, MAX},
+   {
+-   "T2C1", TIMER21, 0xb, 0xb0 | MOD4, Reg_16W, MAX},
++   "I2CST", MOD4, 0x1, 0x10 | MOD4, Reg_16W, MAX},
+   {
+-   "T2CNB2", TIMER21, 0xc, 0xc0 | MOD4, Reg_8W, MAX},
++   "I2CBUF", MOD4, 0x2, 0x20 | MOD4, Reg_8W, MAX},
+   {
+-   "T2V2", TIMER21, 0xd, 0xd0 | MOD4, Reg_16W, MAX},
++   "I2CIE", MOD4, 0x3, 0x30 | MOD4, Reg_16W, MAX},
+   {
+-   "T2R2", TIMER21, 0xe, 0xe0 | MOD4, Reg_16W, MAX},
++   "I2CCK", MOD4, 0x8, 0x80 | MOD4, Reg_16W, MAX},
+   {
+-   "T2C2", TIMER21, 0xf, 0xf0 | MOD4, Reg_16W, MAX},
++   "I2CTO", MOD4, 0x9, 0x90 | MOD4, Reg_8W, MAX},
+   {
+-   "T2CFG1", TIMER21, 0x10, 0x10 | MOD4, Reg_8W, MAX},
+-  {
+-   "T2CFG2", TIMER21, 0x11, 0x11 | MOD4, Reg_8W, MAX},
++   "I2CSLA", MOD4, 0xa, 0xa0 | MOD4, Reg_16W, MAX},
++
+   {
+    NULL, 0, 0, 0, 0, 0}
+ };
+@@ -840,14 +709,20 @@
+   {"@DP[0]", 0x0f},
+   /* Data Ponter 1 */
+   {"@DP[1]", 0x4f},
++  /* Code Ponter */
++  {"@CP", 0x8f},
+   /* Data Pointer 0 post increment */
+   {"@DP[0]++", 0x1f},
+   /* Data Pointer 1 post increment */
+   {"@DP[1]++", 0x5f},
++  /* Code Pointer post increment */
++  {"@CP++", 0x9f},
+   /* Data Pointer 0 post decrement */
+   {"@DP[0]--", 0x2f},
+   /* Data Pointer 1 post decrement */
+   {"@DP[1]--", 0x6f},
++  /* Code Pointer post decrement */
++  {"@CP--", 0xaf},
+   /* ADDED According to New Specification.  */
+ 
+   {"@BP[OFFS]", 0x0E},
+@@ -858,7 +733,8 @@
+   {"@BP[++OFFS]", 0x1E},
+   {"@BP[--OFFS]", 0x2E},
+   {"@++DP[0]", 0x1F},
+-  {"@++DP[1]", 0x5F}, {"@--DP[0]", 0x2F}, {"@--DP[1]", 0x6F}
++  {"@++DP[1]", 0x5F}, {"@--DP[0]", 0x2F}, {"@--DP[1]", 0x6F},
++  {"@++CP", 0x8F}, {"@--CP", 0xAF}
+ };
+ 
+ /* Register bit argument.  */
+@@ -1061,6 +937,11 @@
+    "@DP[1]", BOTH,
+    {
+     "@DP[1]--", "@DP[1]++", NULL, NULL, NULL}},
++  /* Code Pointer */
++  {
++   "@CP", BOTH,
++   {
++    "@CP--", "@CP++", NULL, NULL, NULL}},
+   /* Data Pointer 0 post increment */
+   {
+    "@DP[0]++", SRC,
+@@ -1071,6 +952,11 @@
+    "@DP[1]++", SRC,
+    {
+     NULL, NULL, NULL, NULL, NULL}},
++  /* Code Pointer post increment */
++  {
++   "@CP++", SRC,
++   {
++    NULL, NULL, NULL, NULL, NULL}},
+   /* Data Pointer 0 post decrement */
+   {
+    "@DP[0]--", SRC,
+@@ -1081,6 +967,11 @@
+    "@DP[1]--", SRC,
+    {
+     NULL, NULL, NULL, NULL, NULL}},
++  /* Code Pointer post decrement */
++  {
++   "@CP--", SRC,
++   {
++    NULL, NULL, NULL, NULL, NULL}},
+   /* ADDED According to New Specification */
+ 
+   {
+@@ -1126,7 +1017,15 @@
+   {
+    "@--DP[1]", DST,
+    {
+-    "@DP[1]++", "@DP[1]--", NULL, NULL, NULL}}
++    "@DP[1]++", "@DP[1]--", NULL, NULL, NULL}},
++  {
++   "@++CP", DST,
++   {
++    "@CP--", "@CP++", NULL, NULL, NULL}},
++  {
++   "@--CP", DST,
++   {
++    "@CP++", "@CP--", NULL, NULL, NULL}}
+ };
+ 
+ #endif

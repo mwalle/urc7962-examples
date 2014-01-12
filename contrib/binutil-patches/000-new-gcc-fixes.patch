@@ -1,0 +1,99 @@
+Index: binutils-2.20.1/gas/config/tc-maxq.c
+===================================================================
+--- binutils-2.20.1.orig/gas/config/tc-maxq.c	2009-09-02 09:24:20.000000000 +0200
++++ binutils-2.20.1/gas/config/tc-maxq.c	2014-01-12 19:26:07.113221904 +0100
+@@ -811,7 +811,7 @@
+ 
+   while (ii)
+     {
+-      temp[ii - 1] = toupper ((char) mnemonic[ii - 1]);
++      temp[ii - 1] = TOUPPER ((char) mnemonic[ii - 1]);
+       ii--;
+     }
+ 
+@@ -854,11 +854,11 @@
+ 
+   do
+     {
+-      if (isdigit (imm_start[k]))
++      if (ISDIGIT (imm_start[k]))
+ 	temp[k] = imm_start[k] - '0';
+ 
+-      else if (isalpha (imm_start[k])
+-	       && (imm_start[k] = tolower (imm_start[k])) < 'g')
++      else if (ISALPHA (imm_start[k])
++	       && (imm_start[k] = TOLOWER (imm_start[k])) < 'g')
+ 	temp[k] = 10 + (int) (imm_start[k] - 'a');
+ 
+       else if (imm_start[k] == 'h')
+@@ -1040,9 +1040,9 @@
+   /* Skip the "."  */
+   s++;
+ 
+-  if (isdigit ((char) *s))
++  if (ISDIGIT ((char) *s))
+     rb->bit = atoi (s);
+-  else if (isalpha ((char) *s))
++  else if (ISALPHA ((char) *s))
+     {
+       rb->bit = (char) *s - 'a';
+       rb->bit += 10;
+@@ -1119,11 +1119,11 @@
+       else if (imm_start[k] == '+' && k == 0)
+ 	sign_val = 1;
+ 
+-      else if (isdigit (imm_start[k]))
++      else if (ISDIGIT (imm_start[k]))
+ 	temp[k] = imm_start[k] - '0';
+ 
+-      else if (isalpha (imm_start[k])
+-	       && (imm_start[k] = tolower (imm_start[k])) < 'g')
++      else if (ISALPHA (imm_start[k])
++	       && (imm_start[k] = TOLOWER (imm_start[k])) < 'g')
+ 	temp[k] = 10 + (int) (imm_start[k] - 'a');
+ 
+       else if (imm_start[k] == 'h')
+@@ -1298,13 +1298,13 @@
+       else if (imm_start[k] == '+' && k == 0)
+ 	sign_val = 1;
+ 
+-      else if (isdigit (imm_start[k]))
++      else if (ISDIGIT (imm_start[k]))
+ 	temp[k] = imm_start[k] - '0';
+ 
+-      else if (isalpha (imm_start[k]) && (tolower (imm_start[k])) < 'g')
+-	temp[k] = 10 + (int) (tolower (imm_start[k]) - 'a');
++      else if (ISALPHA (imm_start[k]) && (TOLOWER (imm_start[k])) < 'g')
++	temp[k] = 10 + (int) (TOLOWER (imm_start[k]) - 'a');
+ 
+-      else if (tolower (imm_start[k]) == 'h')
++      else if (TOLOWER (imm_start[k]) == 'h')
+ 	break;
+ 
+       else if ((imm_start[k] == '\0') || (imm_start[k] == ']'))
+@@ -1537,14 +1537,14 @@
+ 
+   while (ii)
+     {
+-      op_string[ii - 1] = toupper ((char) op_string[ii - 1]);
++      op_string[ii - 1] = TOUPPER ((char) op_string[ii - 1]);
+       ii--;
+     }
+ 
+   if (is_space_char (*op_string))
+     ++op_string;
+ 
+-  if (isxdigit (operand_string[0]))
++  if (ISXDIGIT (operand_string[0]))
+     {
+       /* Now the operands can start with an Integer.  */
+       r = parse_reg_by_index (op_string);
+@@ -1564,7 +1564,7 @@
+ 
+       while (ii)
+ 	{
+-	  op_string[ii - 1] = toupper ((char) op_string[ii - 1]);
++	  op_string[ii - 1] = TOUPPER ((char) op_string[ii - 1]);
+ 	  ii--;
+ 	}
+     }

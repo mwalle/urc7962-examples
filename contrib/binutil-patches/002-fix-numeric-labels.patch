@@ -1,0 +1,45 @@
+Index: binutils-2.20.1/gas/config/tc-maxq.c
+===================================================================
+--- binutils-2.20.1.orig/gas/config/tc-maxq.c	2014-01-12 22:52:41.749100564 +0100
++++ binutils-2.20.1/gas/config/tc-maxq.c	2014-01-12 23:09:16.145090830 +0100
+@@ -1544,28 +1544,21 @@
+   if (is_space_char (*op_string))
+     ++op_string;
+ 
+-  if (ISXDIGIT (operand_string[0]))
++  if (*op_string == '%')
+     {
++      op_string++;
+       /* Now the operands can start with an Integer.  */
+       r = parse_reg_by_index (op_string);
+       if (r != NULL)
+ 	{
+-	  if (is_space_char (*op_string))
+-	    ++op_string;
+ 	  i.types[this_operand] = REG;	/* Set the type.  */
+ 	  i.maxq20_op[this_operand].reg = r;	/* Set the Register value.  */
+ 	  i.reg_operands++;
+ 	  return 1;
+ 	}
+-
+-      /* Get the original string.  */
+-      memcpy (op_string, operand_string, strlen (operand_string) + 1);
+-      ii = strlen (operand_string) + 1;
+-
+-      while (ii)
++	else
+ 	{
+-	  op_string[ii - 1] = TOUPPER ((char) op_string[ii - 1]);
+-	  ii--;
++	  return 0;
+ 	}
+     }
+ 
+@@ -3000,6 +2993,7 @@
+   register_chars[']'] = ']';
+   operand_chars['_'] = '_';
+   operand_chars['#'] = '#';
++  operand_chars['%'] = '%';
+   mnemonic_chars['['] = '[';
+   mnemonic_chars[']'] = ']';
+ 
