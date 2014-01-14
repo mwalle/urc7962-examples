@@ -8,7 +8,7 @@ OBJCOPY = $(CROSS_COMPILE)objcopy
 ASFLAGS = -R
 LDFLAGS = -Tlinker.ld
 
-all: hello.bin dump_urom.bin
+all: hello.bin dump_urom.bin xram.bin
 
 %.bin: %.elf
 	$(OBJCOPY) -Obinary $< $@
@@ -20,6 +20,9 @@ hello.elf: hello.o entry.o sigblock.o urom.o uart.o
 	$(LD) $(LDFLAGS) -o $@ $^
 
 dump_urom.elf: dump_urom.o entry.o sigblock.o urom.o uart.o
+	$(LD) $(LDFLAGS) -o $@ $^
+
+xram.elf: xram.o entry.o sigblock.o urom.o uart.o
 	$(LD) $(LDFLAGS) -o $@ $^
 
 clean:
