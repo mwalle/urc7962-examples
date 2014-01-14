@@ -1,1 +1,4 @@
 These patches apply against bintuils-2.20.1.
+
+Compile it with:
+  ./configure --disable-werror --enable-obsolete --target=maxq-coff

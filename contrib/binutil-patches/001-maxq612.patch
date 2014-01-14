@@ -1,17 +1,17 @@
 Index: binutils-2.20.1/include/opcode/maxq.h
 ===================================================================
 --- binutils-2.20.1.orig/include/opcode/maxq.h	2005-05-10 12:21:13.000000000 +0200
-+++ binutils-2.20.1/include/opcode/maxq.h	2014-01-12 22:41:46.761106978 +0100
++++ binutils-2.20.1/include/opcode/maxq.h	2014-01-14 19:16:07.319671048 +0100
 @@ -526,6 +526,8 @@
     "DP[0]", DP, 0x3, 0x30 | DP, Reg_16W, MAX},
    {
     "DP[1]", DP, 0x7, 0x70 | DP, Reg_16W, MAX},
 +  {
-+   "CP", DP, 0xB, 0xB0 | DP, Reg_16W, MAX},
++   "CP", DP, 0xB, 0xB0 | DP, Reg_16W, MAXQ20},
  };
  typedef struct
  {
-@@ -551,274 +553,141 @@
+@@ -551,274 +553,161 @@
  
  reg_entry peripheral_reg_table[] =
  {
@@ -43,56 +43,58 @@ Index: binutils-2.20.1/include/opcode/maxq.h
 -  {
 -   "EIES0", GPIO0, 0xc, 0xc0 | MOD0, Reg_8W, MAX},
 -  /* Port n Direction Registers : GPIO[Ch-Fh] */
--  {
+   {
 -   "PD0", GPIO0, 0x10, 0x10 | MOD0, Reg_8W, MAX},
--  {
++   "PO0", MOD0, 0x0, 0x00 | MOD0, Reg_8W, MAX},
+   {
 -   "PD1", GPIO0, 0x11, 0x11 | MOD0, Reg_8W, MAX},
++   "PO1", MOD0, 0x1, 0x10 | MOD0, Reg_8W, MAX},
    {
 -   "PD2", GPIO0, 0x12, 0x12 | MOD0, Reg_8W, MAX},
-+   "PO0", MOD0, 0x0, 0x00 | MOD0, Reg_8W, MAX},
++   "PO2", MOD0, 0x2, 0x20 | MOD0, Reg_8W, MAX},
    {
 -   "PD3", GPIO0, 0x13, 0x13 | MOD0, Reg_8W, MAX},
 -  /* -------- Real Time Counter Module RTC -------- */
 -  /* RTC Control Register : [01h] */
-+   "PO1", MOD0, 0x1, 0x10 | MOD0, Reg_8W, MAX},
++   "PO3", MOD0, 0x3, 0x30 | MOD0, Reg_8W, MAX},
    {
 -   "RCNT", RTC, 0x19, 0x19 | MOD0, Reg_16W, MAX},
 -  /* RTC Seconds High [02h] */
-+   "PO2", MOD0, 0x2, 0x20 | MOD0, Reg_8W, MAX},
++   "EIF0", MOD0, 0x6, 0x60 | MOD0, Reg_8W, MAX},
    {
 -   "RTSS", RTC, 0x1A, 0x1A | MOD0, Reg_8W, MAX},
 -  /* RTC Seconds Low [03h] */
-+   "PO3", MOD0, 0x3, 0x30 | MOD0, Reg_8W, MAX},
++   "EIE0", MOD0, 0x7, 0x70 | MOD0, Reg_8W, MAX},
    {
 -   "RTSH", RTC, 0x1b, 0x1b | MOD0, Reg_16W, MAX},
 -  /* RTC Subsecond Register [04h] */
-+   "EIF0", MOD0, 0x6, 0x60 | MOD0, Reg_8W, MAX},
++   "PI0", MOD0, 0x8, 0x80 | MOD0, Reg_8W, MAX},
    {
 -   "RTSL", RTC, 0x1C, 0x1C | MOD0, Reg_16W, MAX},
 -  /* RTC Alarm seconds high [05h] */
-+   "EIE0", MOD0, 0x7, 0x70 | MOD0, Reg_8W, MAX},
++   "PI1", MOD0, 0x9, 0x90 | MOD0, Reg_8W, MAX},
    {
 -   "RSSA", RTC, 0x1D, 0x1D | MOD0, Reg_8W, MAX},
 -  /* RTC Alarm seconds high [06h] */
-+   "PI0", MOD0, 0x8, 0x80 | MOD0, Reg_8W, MAX},
++   "PI2", MOD0, 0xa, 0xa0 | MOD0, Reg_8W, MAX},
    {
 -   "RASH", RTC, 0x1E, 0x1E | MOD0, Reg_8W, MAX},
 -  /* RTC Subsecond Alarm Register [07h] */
-+   "PI1", MOD0, 0x9, 0x90 | MOD0, Reg_8W, MAX},
++   "PI3", MOD0, 0xb, 0xb0 | MOD0, Reg_8W, MAX},
    {
 -   "RASL", RTC, 0x1F, 0x1F | MOD0, Reg_16W, MAX},
 -  /* -------- The GPIO Module Registers -------- */
 -  /* Port n Output Registers : GPIO[0h-4h] */
-+   "PI2", MOD0, 0xa, 0xa0 | MOD0, Reg_8W, MAX},
-   {
--   "PO4", GPIO1, 0x0, 0x00 | MOD1, Reg_8W, MAX},
-+   "PI3", MOD0, 0xb, 0xb0 | MOD0, Reg_8W, MAX},
-   {
--   "PO5", GPIO1, 0x1, 0x10 | MOD1, Reg_8W, MAX},
 +   "EIES0", MOD0, 0xc, 0xc0 | MOD0, Reg_8W, MAX},
    {
--   "PO6", GPIO1, 0x2, 0x20 | MOD1, Reg_8W, MAX},
+-   "PO4", GPIO1, 0x0, 0x00 | MOD1, Reg_8W, MAX},
 +   "EIES1", MOD0, 0xd, 0xd0 | MOD0, Reg_8W, MAX},
+   {
+-   "PO5", GPIO1, 0x1, 0x10 | MOD1, Reg_8W, MAX},
++   "FCNTL", MOD0, 0xe, 0xe0 | MOD0, Reg_8W, MAX},
+   {
+-   "PO6", GPIO1, 0x2, 0x20 | MOD1, Reg_8W, MAX},
++   "FDATA", MOD0, 0xf, 0xf0 | MOD0, Reg_16W, MAX},
    {
 -   "PO7", GPIO1, 0x3, 0x30 | MOD1, Reg_8W, MAX},
 -  /* External Interrupt Flag Register : GPIO[6h] */
@@ -110,30 +112,38 @@ Index: binutils-2.20.1/include/opcode/maxq.h
 +   "PD3", MOD0, 0x13, 0x13 | MOD0, Reg_8W, MAX},
    {
 -   "PI5", GPIO1, 0x9, 0x90 | MOD1, Reg_8W, MAX},
--  {
++   "CHPREV", MOD0, 0x17, 0x17 | MOD0, Reg_16W, MAX},
+   {
 -   "PI6", GPIO1, 0xa, 0xa0 | MOD1, Reg_8W, MAX},
--  {
++   "ICDT0", MOD0, 0x18, 0x18 | MOD0, Reg_8W, MAX},
+   {
 -   "PI7", GPIO1, 0xb, 0xb0 | MOD1, Reg_8W, MAX},
--  {
++   "ICDT1", MOD0, 0x19, 0x19 | MOD0, Reg_8W, MAX},
+   {
 -   "EIES1", GPIO1, 0xc, 0xc0 | MOD1, Reg_8W, MAX},
 -  /* Port n Direction Registers : GPIO[Ch-Fh] */
--  {
++   "ICDC", MOD0, 0x1a, 0x1a | MOD0, Reg_8W, MAX},
+   {
 -   "PD4", GPIO1, 0x10, 0x10 | MOD1, Reg_8W, MAX},
--  {
++   "ICDF", MOD0, 0x1b, 0x1b | MOD0, Reg_8W, MAX},
+   {
 -   "PD5", GPIO1, 0x11, 0x11 | MOD1, Reg_8W, MAX},
--  {
++   "ICDB", MOD0, 0x1c, 0x1c | MOD0, Reg_8W, MAX},
+   {
 -   "PD6", GPIO1, 0x12, 0x12 | MOD1, Reg_8W, MAX},
--  {
++   "ICDA", MOD0, 0x1d, 0x1d | MOD0, Reg_8W, MAX},
+   {
 -   "PD7", GPIO1, 0x13, 0x13 | MOD1, Reg_8W, MAX},
 -#if 0
 -  /* Supply Boltage Check Register */
--  {
++   "ICDD", MOD0, 0x1e, 0x1e | MOD0, Reg_8W, MAX},
+   {
 -   "SVS", GPIO1, 0x1e, 0x1e | GPIO1, Reg_8W, MAX},
 -  /* Wake up output register */
 -  {
 -   "WK0", GPIO1, 0x1f, 0x1f | GPIO1, Reg_8W, MAX},
 -#endif /* */
-+   "CHPREV", MOD0, 0x17, 0x17 | MOD0, Reg_16W, MAX},
++   "TM", MOD0, 0x1f, 0x1f | MOD0, Reg_16W, MAX},
  
 -  /* -------- MAC Hardware multiplier module -------- */
 -  /* MAC Hardware Multiplier control register: [01h] */
@@ -311,17 +321,23 @@ Index: binutils-2.20.1/include/opcode/maxq.h
 -   "T2CNA1", TIMER21, 0x0, 0x00 | MOD4, Reg_8W, MAX},
 -  {
 -   "T2H1", TIMER21, 0x1, 0x10 | MOD4, Reg_8W, MAX},
--  {
++   "I2CCN", MOD4, 0x0, 0x00 | MOD4, Reg_16W, MAX},
+   {
 -   "T2RH1", TIMER21, 0x2, 0x20 | MOD4, Reg_8W, MAX},
--  {
++   "I2CST", MOD4, 0x1, 0x10 | MOD4, Reg_16W, MAX},
+   {
 -   "T2CH1", TIMER21, 0x3, 0x30 | MOD4, Reg_8W, MAX},
--  {
++   "I2CBUF", MOD4, 0x2, 0x20 | MOD4, Reg_8W, MAX},
+   {
 -   "T2CNA2", TIMER21, 0x4, 0x40 | MOD4, Reg_8W, MAX},
--  {
++   "I2CIE", MOD4, 0x3, 0x30 | MOD4, Reg_16W, MAX},
+   {
 -   "T2H2", TIMER21, 0x5, 0x50 | MOD4, Reg_8W, MAX},
--  {
++   "I2CCK", MOD4, 0x8, 0x80 | MOD4, Reg_16W, MAX},
+   {
 -   "T2RH2", TIMER21, 0x6, 0x60 | MOD4, Reg_8W, MAX},
--  {
++   "I2CTO", MOD4, 0x9, 0x90 | MOD4, Reg_8W, MAX},
+   {
 -   "T2CH2", TIMER21, 0x7, 0x70 | MOD4, Reg_8W, MAX},
 -  {
 -   "T2CNB1", TIMER21, 0x8, 0x80 | MOD4, Reg_8W, MAX},
@@ -329,23 +345,17 @@ Index: binutils-2.20.1/include/opcode/maxq.h
 -   "T2V1", TIMER21, 0x9, 0x90 | MOD4, Reg_16W, MAX},
 -  {
 -   "T2R1", TIMER21, 0xa, 0xa0 | MOD4, Reg_16W, MAX},
-+   "I2CCN", MOD4, 0x0, 0x00 | MOD4, Reg_16W, MAX},
-   {
+-  {
 -   "T2C1", TIMER21, 0xb, 0xb0 | MOD4, Reg_16W, MAX},
-+   "I2CST", MOD4, 0x1, 0x10 | MOD4, Reg_16W, MAX},
-   {
+-  {
 -   "T2CNB2", TIMER21, 0xc, 0xc0 | MOD4, Reg_8W, MAX},
-+   "I2CBUF", MOD4, 0x2, 0x20 | MOD4, Reg_8W, MAX},
-   {
+-  {
 -   "T2V2", TIMER21, 0xd, 0xd0 | MOD4, Reg_16W, MAX},
-+   "I2CIE", MOD4, 0x3, 0x30 | MOD4, Reg_16W, MAX},
-   {
+-  {
 -   "T2R2", TIMER21, 0xe, 0xe0 | MOD4, Reg_16W, MAX},
-+   "I2CCK", MOD4, 0x8, 0x80 | MOD4, Reg_16W, MAX},
-   {
+-  {
 -   "T2C2", TIMER21, 0xf, 0xf0 | MOD4, Reg_16W, MAX},
-+   "I2CTO", MOD4, 0x9, 0x90 | MOD4, Reg_8W, MAX},
-   {
+-  {
 -   "T2CFG1", TIMER21, 0x10, 0x10 | MOD4, Reg_8W, MAX},
 -  {
 -   "T2CFG2", TIMER21, 0x11, 0x11 | MOD4, Reg_8W, MAX},
@@ -354,7 +364,7 @@ Index: binutils-2.20.1/include/opcode/maxq.h
    {
     NULL, 0, 0, 0, 0, 0}
  };
-@@ -840,14 +709,20 @@
+@@ -840,14 +729,20 @@
    {"@DP[0]", 0x0f},
    /* Data Ponter 1 */
    {"@DP[1]", 0x4f},
@@ -375,17 +385,17 @@ Index: binutils-2.20.1/include/opcode/maxq.h
    /* ADDED According to New Specification.  */
  
    {"@BP[OFFS]", 0x0E},
-@@ -858,7 +733,8 @@
+@@ -858,7 +753,8 @@
    {"@BP[++OFFS]", 0x1E},
    {"@BP[--OFFS]", 0x2E},
    {"@++DP[0]", 0x1F},
 -  {"@++DP[1]", 0x5F}, {"@--DP[0]", 0x2F}, {"@--DP[1]", 0x6F}
 +  {"@++DP[1]", 0x5F}, {"@--DP[0]", 0x2F}, {"@--DP[1]", 0x6F},
-+  {"@++CP", 0x8F}, {"@--CP", 0xAF}
++  {"@++CP", 0x9F}, {"@--CP", 0xAF}
  };
  
  /* Register bit argument.  */
-@@ -1061,6 +937,11 @@
+@@ -1061,6 +957,11 @@
     "@DP[1]", BOTH,
     {
      "@DP[1]--", "@DP[1]++", NULL, NULL, NULL}},
@@ -397,7 +407,7 @@ Index: binutils-2.20.1/include/opcode/maxq.h
    /* Data Pointer 0 post increment */
    {
     "@DP[0]++", SRC,
-@@ -1071,6 +952,11 @@
+@@ -1071,6 +972,11 @@
     "@DP[1]++", SRC,
     {
      NULL, NULL, NULL, NULL, NULL}},
@@ -409,7 +419,7 @@ Index: binutils-2.20.1/include/opcode/maxq.h
    /* Data Pointer 0 post decrement */
    {
     "@DP[0]--", SRC,
-@@ -1081,6 +967,11 @@
+@@ -1081,6 +987,11 @@
     "@DP[1]--", SRC,
     {
      NULL, NULL, NULL, NULL, NULL}},
@@ -421,7 +431,7 @@ Index: binutils-2.20.1/include/opcode/maxq.h
    /* ADDED According to New Specification */
  
    {
-@@ -1126,7 +1017,15 @@
+@@ -1126,7 +1037,15 @@
    {
     "@--DP[1]", DST,
     {
