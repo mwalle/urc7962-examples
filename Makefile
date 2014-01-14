@@ -16,7 +16,7 @@ all: hello.bin
 %.o: %.S
 	$(AS) $(ASFLAGS) -o $@ $<
 
-hello.elf: hello.o entry.o sigblock.o urom.o
+hello.elf: hello.o entry.o sigblock.o urom.o uart.o
 	$(LD) $(LDFLAGS) -o $@ $^
 
 clean:
